@@ -2,6 +2,7 @@ from Tkinter import *
 import fileOperator
 
 def btnCleanClicked():
+    print entryPath.get()
     f = fileOperator.fileOperator(entryPath.get())
     txtContent.insert(END,f.clean())
 
