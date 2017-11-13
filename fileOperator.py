@@ -17,7 +17,9 @@ class fileOperator:
                 self.processedFolder = tmp
                 return 0
         return 1
-
+    def getRawExtensionName(self):
+        # canon .CR2, sony .ARW
+        return ".NEF"
     def clean(self):
         if not os.path.isdir(self.rootPath):
             return "Please input valid path\n"
@@ -28,7 +30,7 @@ class fileOperator:
         for f in processedFiles:
             extension = os.path.splitext(f)[1]
             fileName = f.rpartition("_")[0]
-            src = self.rootPath + os.sep + fileName + extension
+            src = self.rootPath + os.sep + fileName + self.getRawExtensionName()
             if extension == ".JPG" and os.path.exists(src):
                 count = count + 1
                 try:
