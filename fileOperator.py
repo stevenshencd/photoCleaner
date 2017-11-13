@@ -23,12 +23,15 @@ class fileOperator:
         if not os.path.isdir(self.rootPath):
             return "Please input valid path\n"
         if self.findProcessedFolder() != 0 :
-            return "here is no processed folder\n"
+            return "There is no Processed folder under current path\n"
         processedFiles = os.listdir(self.processedFolder)
         for f in processedFiles:
             extension = os.path.splitext(f)[1]
             fileName = f.rpartition("_")[0]
             src = self.rootPath + os.sep + fileName + extension
             self.count = self.count + 1
-            shutil.copy(src,self.processedFolder)
+            try:
+                shutil.copy(src,self.processedFolder)
+            except IOError:
+                return "Error info: src: " + src + "\n"
         return str(self.count) + " files are copied to Processed folder\nCleaning suceed\n"
